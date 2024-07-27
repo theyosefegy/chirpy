@@ -16,14 +16,6 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
-type ValidResponse struct {
-	Valid bool `json:"valid"`
-}
-
-type CleanedBody struct {
-	Cleaned_Body string `json:"cleaned_body"`
-}
-
 var profaneWords = []string{"kerfuffle", "sharbert", "fornax"}
 
 // Helper function to respond with an error

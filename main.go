@@ -26,7 +26,8 @@ func main() {
 	mux.HandleFunc("GET /api/healthz", handlers.ReadinessHandler)
 	mux.HandleFunc("GET /api/reset", cfg.ResetHandler)
 
-	http.HandleFunc("POST /api/chirps", handlers.ValidateChirpHandler)
+	mux.HandleFunc("POST /api/chirps", handlers.PostChirpHandler)
+	mux.HandleFunc("GET /api/chirps", handlers.GetChirpHandler)
 	
 	// admin/*
 	mux.HandleFunc("GET /admin/metrics", cfg.HandlerMetrics)
