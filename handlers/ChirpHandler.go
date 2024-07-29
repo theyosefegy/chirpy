@@ -15,6 +15,10 @@ type Chirp struct {
 	Body string `json:"body"`
 }
 
+type DBStructure struct {
+    Chirps map[int]Chirp `json:"chirps"`
+}
+
 var chirps = []Chirp{}
 
 // The post handler method.
@@ -47,5 +51,6 @@ func PostChirpHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetChirpHandler(w http.ResponseWriter, r *http.Request) {
+
 	myutils.RespondWithJSON(w, http.StatusOK, chirps)
 }

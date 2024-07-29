@@ -7,7 +7,7 @@ import (
 	handlers "github.com/theyosefegy/chriby/handlers"
 )
 
-const filepathRoot = "."
+const filepathRoot = "./assets"
 const port = "8080"
 
 func main() {
@@ -19,6 +19,7 @@ func main() {
 		Handler: mux,
 	}
 
+
 	// app/*
 	mux.Handle("/app/*", http.StripPrefix("/app", cfg.MiddlewareHitsInc(http.FileServer(http.Dir(filepathRoot)))))
 	
@@ -28,6 +29,8 @@ func main() {
 
 	mux.HandleFunc("POST /api/chirps", handlers.PostChirpHandler)
 	mux.HandleFunc("GET /api/chirps", handlers.GetChirpHandler)
+
+	mux.HandleFunc("GET /api/chirp/", handlers.GetChripByIDHandler)
 	
 	// admin/*
 	mux.HandleFunc("GET /admin/metrics", cfg.HandlerMetrics)
