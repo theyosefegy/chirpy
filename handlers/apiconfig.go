@@ -3,12 +3,19 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
+
+
 
 type ApiConfig struct {
 	fileserverHits int
+	JWTSecret string
 }
 
+var Cfg = ApiConfig{
+	JWTSecret: os.Getenv("JWT_SECRET"),
+}
 
 
 func (cfg *ApiConfig) MiddlewareHitsInc(h http.Handler) http.Handler {

@@ -13,10 +13,7 @@ var idCounter = 1
 type Chirp struct {
 	ID   int    `json:"id"`
 	Body string `json:"body"`
-}
-
-type DBStructure struct {
-    Chirps map[int]Chirp `json:"chirps"`
+	Author_id int `json:"author_id"` 
 }
 
 var chirps = []Chirp{}
@@ -32,6 +29,13 @@ func PostChirpHandler(w http.ResponseWriter, r *http.Request) {
 		myutils.RespondWithError(w, http.StatusInternalServerError, "Something went wrong")
 		return
 	}
+
+	for _, u := range users {
+		if u.ID != chirpReq.Author_id {
+			continue
+		} 
+	}
+
 
 	// Validate chirp body length
 	if len(chirpReq.Body) > 140 {
